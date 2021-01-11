@@ -1,0 +1,9 @@
+@font-face {
+                    font-family: 'Noto Nastaliq Urdu Draft';
+                    font-style: normal;
+                    font-weight: 400;
+                    src: url('NotoNastaliqUrduDraft.eot');
+	src: url('NotoNastaliqUrduDraft.ttf');
+	src: url('NotoNastaliqUrduDraft.woff');
+	src: url('NotoNastaliqUrduDraft.woff2');
+}

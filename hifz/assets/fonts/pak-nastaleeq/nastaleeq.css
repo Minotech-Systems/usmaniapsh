@@ -1,0 +1,8 @@
+@font-face
+{
+	font-family:BodyText;
+	src: url('fonts/pak-nastaleeq-body-text.ttf');
+	src: local('fonts/pak-nastaleeq-body-text.woff');
+	src: url('fonts/pak-nastaleeq-body-text.svg');
+	src: url('fonts/pak-nastaleeq-body-text.otf');
+}

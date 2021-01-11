@@ -1,0 +1,5 @@
+[20-Nov-2020 00:58:53 America/Chicago] PHP Fatal error:  session_start(): Failed to initialize storage module: user (path: ci_sessions) in /home1/usmaniapsh/public_html/jamia_bs/system/libraries/Session/Session.php on line 143
+[20-Nov-2020 01:01:41 America/Chicago] PHP Fatal error:  session_start(): Failed to initialize storage module: user (path: ci_sessions) in /home1/usmaniapsh/public_html/jamia_bs/system/libraries/Session/Session.php on line 143
+[20-Nov-2020 01:03:32 America/Chicago] PHP Fatal error:  session_start(): Failed to initialize storage module: user (path: ci_sessions) in /home1/usmaniapsh/public_html/jamia_bs/system/libraries/Session/Session.php on line 143
+[20-Nov-2020 01:05:09 America/Chicago] PHP Fatal error:  session_start(): Failed to initialize storage module: user (path: ci_sessions) in /home1/usmaniapsh/public_html/jamia_bs/system/libraries/Session/Session.php on line 143
+[20-Nov-2020 01:07:21 America/Chicago] PHP Fatal error:  session_start(): Failed to initialize storage module: user (path: ci_sessions) in /home1/usmaniapsh/public_html/jamia_bs/system/libraries/Session/Session.php on line 143

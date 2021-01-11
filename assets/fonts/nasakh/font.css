@@ -1,0 +1,11 @@
+@font-face {
+	font-family: 'NafeesWeb';
+	src: url('./NafeesWeb.eot');
+	src: local('NafeesWeb'), url('./NafeesWeb.woff') format('woff'), url('./NafeesWeb.ttf') format('truetype');
+}
+/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_7639">Text with this font applied</p> */
+.fontsforweb_fontid_7639 {
+	font-family: 'NafeesWeb' !important;
+}
+
+/* Font downloaded from FontsForWeb.com */

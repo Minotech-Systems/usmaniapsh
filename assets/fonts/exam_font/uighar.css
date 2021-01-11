@@ -1,0 +1,9 @@
+@font-face
+{
+	font-family:examfont;
+	src: url('microsoft-uighur-navigation.ttf');
+	src: local('microsoft-uighur-navigation.woff');
+	src: url('microsoft-uighur-navigation.svg');
+	src: url('microsoft-uighur-navigation.otf');
+	
+}
