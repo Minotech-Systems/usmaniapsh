@@ -35,14 +35,18 @@ public function add_aurther(){
 //            if ($this->session->userdata('user_login') != 1)
 //            redirect(base_url(), 'refresh');
             
-    if($this->input->post()):
+     if($this->input->post()):
+         
         $name = $this->input->post('name');
-    $data = array('name'=>$name,'create_by'=>$this->session->userdata('user_id'),'create_datetime'=>date('Y-m-d H:i:s'),);
+       
+        $data = array('name'=>$name,'create_by'=>$this->session->userdata('user_id'),'create_datetime'=>date('Y-m-d H:i:s'),);
+     
         $this->Crud_model->insert('lib_authors',$data);
-    endif;
+   
+        endif;
+        
         $where = array();
         $where['questioner_id'] = $this->session->userdata('user_id');
-        
                                         $this->db->select('*');
                                         $this->db->from('lib_authors');
         $page_data['result']        =   $this->db->get()->result();
@@ -52,6 +56,10 @@ public function add_aurther(){
         $this->load->view('front_end/index', $page_data);
 }
 public function delete_aurther(){
+    $id = $this->uri->segment(3);
+    $this->db->where('autr_id',$id);
+    $this->db->delete('lib_authors');
+    redirect('AddAurther');
     
 }
 }

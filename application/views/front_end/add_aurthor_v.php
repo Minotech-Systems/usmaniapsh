@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-md-12">
                     
-                    <form id=""  class="form" method="post">
+                    <form id="" class="form" method="post">
                                 <h3 class="text-center text-info"><?php echo "مصنف کا اندراج کریں"?></h3>
                                 <hr/>
                                 <div class="form-group" style="text-align:right">
@@ -75,11 +75,11 @@
                             <td><?php echo $row->name?></td>
                             <td><?php echo date('d-m-Y',strtotime($row->create_datetime))?></td>
                             <td>
-                                    <div class="btn-group"r="rtl">      
-                                        <button type="button"  class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"> 
+                                <div class="btn-group">      
+                                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"> 
                                             <?php echo get_phrase('action') ?> <span class="caret"></span>    
                                         </button>     
-                                        <ul class="dropdown-menu dropdown-default pull-right" role="menu">
+                                    <ul class="dropdown-menu dropdown-default pull-right"  role="menu">
 
 
                                             <!-- STUDENT PROFILE LINK -->    
@@ -91,7 +91,7 @@
                                             </li>
                                             <!-- STUDENT EDIT LINK -->    
                                             <li>  
-                                                <a href="">       
+                                                <a href="<?php echo base_url('index.php?/LibraryController/edit_aurther/'.$row->autr_id); ?>">       
                                                     <i class="entypo-pencil"></i>     
                                                     <?php echo get_phrase('edit'); ?>   
                                                 </a>  
@@ -99,7 +99,7 @@
                                             <li class="divider"></li>
                                             <!-- STUDENT EDIT LINK -->    
                                             <li>  
-                                                 <a href="#" onclick="confirm_modal('<?php echo base_url(); ?>index.php?LibraryController/delete_aurther/<?php echo $row->autr_id ?>');" >       
+                                                 <a href="<?php echo base_url('index.php?/LibraryController/delete_aurther/'.$row->autr_id); ?>" >       
                                                     <i class="entypo-trash"></i>     
                                                     <?php echo get_phrase('delete'); ?>   
                                                 </a>    
