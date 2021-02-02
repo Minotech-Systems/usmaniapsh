@@ -18,8 +18,10 @@ class Website extends CI_Controller {
         $this->load->database();
         $this->load->library('session');
         $this->load->model('admin_model');
-
-
+//                  $this->db->select('lib_books.book_name,lib');  
+//                  $this->db->join('lib_publisher','lib_publisher.pub_id=lib_books.pub_id');  
+//        $result = $this->db->get_where('lib_books')->result();
+//        echo '<pre>';print_r($result);die;
         /* cache control */
         $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
         $this->output->set_header('Pragma: no-cache');
@@ -478,4 +480,333 @@ class Website extends CI_Controller {
         $this->load->view('backend/website', $page_data);
     }
 
-}
+    function alasr_book($param1 = '', $param2 = '') {
+
+        if ($this->session->userdata('ifta_admin_login') != 1)
+            redirect(base_url(), 'refresh');
+
+        if ($param1 == 'add_book') {
+
+
+            if ($this->input->post()):
+
+                $book = $this->input->post('book');
+                $edition = $this->input->post('edition');
+               
+                $publish= date('Y-m-d',strtotime($this->input->post('publish')));
+               
+                $expire= date('Y-m-d',strtotime($this->input->post('expiery')));
+               
+                $data = array('book_name' => $book, 'book_edition' => $edition, 'book_publish_date' => $publish,
+                    'book_expirey_date' => $expire, 'create_by' => $this->session->userdata('ifta_admin_login'), 'create_at' => date('Y-m-d H:i:s'));
+                $this->db->insert('lib_books', $data);
+            endif;
+            $this->session->set_flashdata('flash_message', 'کتاب کو کامیابی سے داخل کر دیا گیا ہے۔');
+            redirect(base_url() . 'website/alasr_book', 'refresh');
+        }
+        if ($param1 == 'update_book') {
+            $book = $this->input->post('book');
+            $edition = $this->input->post('edition');
+
+            $publish= date('Y-m-d',strtotime($this->input->post('publish')));
+            $expire= date('Y-m-d',strtotime($this->input->post('expiery')));
+            
+            $update_data = array('book_name' => $book, 'book_edition' => $edition, 'book_publish_date' => $publish,
+           'book_expirey_date' => $expire, 'create_by' => $this->session->userdata('ifta_admin_login'), 'create_at' => date('Y-m-d H:i:s'));
+
+            $this->db->where('book_id', $param2);
+            $this->db->update('lib_books', $update_data);
+
+
+            $this->session->set_flashdata('flash_message', 'کتاب کی کامیابی سے تصیح کردیگی ہے۔');
+            redirect(base_url() . 'website/alasr_book', 'refresh');
+        }
+        if ($param1 == 'delete_book') {
+
+            $this->db->where('book_id', $param2);
+            $this->db->delete('lib_books');
+            $this->session->set_flashdata('flash_message', 'کتاب کو کامیابی سے حذف کر دیا گیاہے۔');
+            redirect(base_url() . 'website/alasr_book', 'refresh');
+        }
+
+
+        $page_data['page_name'] = 'alasr_book';
+        $page_data['page_title'] = get_phrase('alasr_resala');
+        $this->load->view('backend/website', $page_data);
+    }
+
+    function alasr_musanif($param1 = '', $param2 = '') {
+
+        if ($this->session->userdata('ifta_admin_login') != 1)
+            redirect(base_url(), 'refresh');
+
+        if ($param1 == 'add_musf') {
+
+
+            if ($this->input->post()):
+
+                $name = $this->input->post('name');
+                $phone = $this->input->post('phone');
+                $address = $this->input->post('address');
+                $data = array('name' => $name, 'phone' => $phone, 'address' => $address, 'create_by' => $this->session->userdata('ifta_admin_login'), 'create_datetime' => date('Y-m-d H:i:s'));
+                $this->db->insert('lib_authors', $data);
+            endif;
+            $this->session->set_flashdata('flash_message', 'مصنف کو کامیابی سے داخل کر دیا گیا ہے۔');
+            redirect(base_url() . 'website/alasr_resala', 'refresh');
+        }
+        if ($param1 == 'update_musf') {
+
+            $name = $this->input->post('name');
+            $phone = $this->input->post('phone');
+            $address = $this->input->post('address');
+            $update_data = array('name' => $name, 'address' => $address, 'phone' => $phone, 'update_datetime' => date('Y-m-d H:i:s'));
+
+
+            $this->db->where('autr_id', $param2);
+            $this->db->update('lib_authors', $update_data);
+
+
+            $this->session->set_flashdata('flash_message', 'مصنف کی کامیابی سے تصیح کردیگی ہے۔');
+            redirect(base_url() . 'website/alasr_musanif', 'refresh');
+        }
+        if ($param1 == 'delete_musf') {
+
+            $this->db->where('autr_id', $param2);
+            $this->db->delete('lib_authors');
+            $this->session->set_flashdata('flash_message', 'مصنف کو کامیابی سے حذف کر دیا گیاہے۔');
+            redirect(base_url() . 'website/alasr_musanif', 'refresh');
+        }
+
+
+        $page_data['page_name'] = 'alasr_musanif';
+        $page_data['page_title'] = get_phrase('alasr_resala');
+        $this->load->view('backend/website', $page_data);
+    }
+
+    function alasr_topic($param1 = '', $param2 = '') {
+
+        if ($this->session->userdata('ifta_admin_login') != 1)
+            redirect(base_url(), 'refresh');
+
+        if ($param1 == 'add_topic') {
+
+            if ($this->input->post()):
+
+                $topic = $this->input->post('topicname');
+               // $subtopic = $this->input->post('subtopic');
+                $reference = $this->input->post('reference');
+                $data = array('top_name' => $topic,'top_reference' => $reference, 'create_by' => $this->session->userdata('ifta_admin_login'), 'create_at' => date('Y-m-d H:i:s'));
+                $this->db->insert('lib_topics', $data);
+            endif;
+            $this->session->set_flashdata('flash_message', 'ٹاپک کو کامیابی سے داخل کر دیا گیا ہے۔');
+            redirect(base_url() . 'website/alasr_topic', 'refresh');
+        }
+        if ($param1 == 'update_topic') {
+            $topic = $this->input->post('topicname');
+           // $subtopic = $this->input->post('subtopic');
+            $reference = $this->input->post('reference');
+            $update_data = array('top_name' => $topic, 'top_reference' => $reference, 'create_by' => $this->session->userdata('ifta_admin_login'), 'create_at' => date('Y-m-d H:i:s'));
+
+
+            $this->db->where('top_id', $param2);
+            $this->db->update('lib_topics', $update_data);
+
+            $this->session->set_flashdata('flash_message', 'ٹاپک کی کامیابی سے تصیح کردیگی ہے۔');
+            redirect(base_url() . 'website/alasr_topic', 'refresh');
+        }
+        if ($param1 == 'delete_topic') {
+
+            $this->db->where('top_id', $param2);
+            $this->db->delete('lib_topics');
+            $this->session->set_flashdata('flash_message', 'ٹاپک کو کامیابی سے حذف کر دیا گیاہے۔');
+            redirect(base_url() . 'website/alasr_topic', 'refresh');
+        }
+
+
+        $page_data['page_name'] = 'alasr_topic';
+        $page_data['page_title'] = get_phrase('alasr_resala');
+        $this->load->view('backend/website', $page_data);
+    } 
+    function alasr_subtopic($param1 = '', $param2 = '') {
+
+        if ($this->session->userdata('ifta_admin_login') != 1)
+            redirect(base_url(), 'refresh');
+
+        if ($param1 == 'add_subtopic') {
+
+            if ($this->input->post()):
+
+                $topic = $this->input->post('subtopicname');
+                $reference = $this->input->post('reference');
+                $data = array('sub_topic_name' => $topic, 'create_by' => $this->session->userdata('ifta_admin_login'), 'create_at' => date('Y-m-d H:i:s'));
+                $this->db->insert('lib_subtopic', $data);
+            endif;
+            $this->session->set_flashdata('flash_message', 'سب ٹاپک کو کامیابی سے داخل کر دیا گیا ہے۔');
+            redirect(base_url() . 'website/alasr_subtopic', 'refresh');
+        }
+        if ($param1 == 'update_subtopic') {
+            $topic = $this->input->post('subtopicname');
+            $update_data = array('sub_topic_name' => $topic, 'create_by' => $this->session->userdata('ifta_admin_login'), 'create_at' => date('Y-m-d H:i:s'));
+
+
+            $this->db->where('sub_topic_id', $param2);
+            $this->db->update('lib_subtopic', $update_data);
+
+            $this->session->set_flashdata('flash_message', 'سب ٹاپک کی کامیابی سے تصیح کردیگی ہے۔');
+            redirect(base_url() . 'website/alasr_subtopic', 'refresh');
+        }
+        if ($param1 == 'delete_subtopic') {
+
+            $this->db->where('sub_topic_id', $param2);
+            $this->db->delete('lib_subtopic');
+            $this->session->set_flashdata('flash_message', 'سب ٹاپک کو کامیابی سے حذف کر دیا گیاہے۔');
+            redirect(base_url() . 'website/alasr_subtopic', 'refresh');
+        }
+
+
+        $page_data['page_name'] = 'alasr_subtopic';
+        $page_data['page_title'] = get_phrase('alasr_resala');
+        $this->load->view('backend/website', $page_data);
+    }
+    
+    function alasr_reader($param1 = '', $param2 = '') {
+
+        if ($this->session->userdata('ifta_admin_login') != 1)
+            redirect(base_url(), 'refresh');
+           
+        if ($param1 == 'add_reader') {
+            if ($this->input->post()):
+
+                $name = $this->input->post('name');
+                $phone = $this->input->post('phone');
+                $address = $this->input->post('address');
+                $email = $this->input->post('email');
+                $data = array('read_name' => $name, 'read_phone' => $phone, 'read_address' => $address,'read_email'=>$email, 'created_by' => $this->session->userdata('ifta_admin_login'), 'created_at' => date('Y-m-d H:i:s'));
+                $this->db->insert('lib_reader', $data);
+            endif;
+            $this->session->set_flashdata('flash_message', 'قاری کو کامیابی سے داخل کر دیا گیا ہے۔');
+            redirect(base_url() . 'website/alasr_reader', 'refresh');
+        }
+        if ($param1 == 'update_reader') {
+            $name = $this->input->post('name');
+            $phone = $this->input->post('phone');
+            $address = $this->input->post('address');
+            $email = $this->input->post('email');
+            $update_data = array('read_name' => $name, 'read_phone' => $phone, 'read_address' => $address,'read_email'=>$email, 'updated_by' => $this->session->userdata('ifta_admin_login'), 'updated_at' => date('Y-m-d H:i:s'));
+               
+
+            $this->db->where('read_id', $param2);
+            $this->db->update('lib_reader', $update_data);
+
+
+            $this->session->set_flashdata('flash_message', 'قاری کی کامیابی سے تصیح کردیگی ہے۔');
+            redirect(base_url() . 'website/alasr_reader', 'refresh');
+        }
+        if ($param1 == 'delete_reader') {
+
+            $this->db->where('read_id', $param2);
+            $this->db->delete('lib_reader');
+            $this->session->set_flashdata('flash_message', 'قاری کو کامیابی سے حذف کر دیا گیاہے۔');
+            redirect(base_url() . 'website/alasr_reader', 'refresh');
+        }
+
+
+        $page_data['page_name'] = 'alasr_reader';
+        $page_data['page_title'] = get_phrase('alasr_resala');
+        $this->load->view('backend/website', $page_data);
+    }
+
+    function alasr_readertype($param1 = '', $param2 = '') {
+
+        if ($this->session->userdata('ifta_admin_login') != 1)
+            redirect(base_url(), 'refresh');
+           
+        if ($param1 == 'add_readertype') {
+            if ($this->input->post()):
+
+                $name = $this->input->post('name');
+                $data = array('readtype_name' => $name, 'created_by' => $this->session->userdata('ifta_admin_login'), 'created_at' => date('Y-m-d H:i:s'));
+                $this->db->insert('lib_readertype', $data);
+            endif;
+            $this->session->set_flashdata('flash_message', 'قسم کو کامیابی سے داخل کر دیا گیا ہے۔');
+            redirect(base_url() . 'website/alasr_readertype', 'refresh');
+        }
+        if ($param1 == 'update_readertype') {
+            $name = $this->input->post('name');
+            $update_data = array('readtype_name' => $name, 'updated_by' => $this->session->userdata('ifta_admin_login'), 'updated_at' => date('Y-m-d H:i:s'));
+               
+
+            $this->db->where('readtype_id', $param2);
+            $this->db->update('lib_readertype', $update_data);
+
+
+            $this->session->set_flashdata('flash_message', 'قسم کی کامیابی سے تصیح کردیگی ہے۔');
+            redirect(base_url() . 'website/alasr_readertype', 'refresh');
+        }
+        if ($param1 == 'delete_readertype') {
+
+            $this->db->where('readtype_id', $param2);
+            $this->db->delete('lib_readertype');
+            $this->session->set_flashdata('flash_message', 'قسم کو کامیابی سے حذف کر دیا گیاہے۔');
+            redirect(base_url() . 'website/alasr_readertype', 'refresh');
+        }
+
+
+        $page_data['page_name'] = 'alasr_readertype';
+        $page_data['page_title'] = get_phrase('alasr_resala');
+        $this->load->view('backend/website', $page_data);
+    }
+    function alasr_publisher($param1 = '', $param2 = '') {
+
+        if ($this->session->userdata('ifta_admin_login') != 1)
+            redirect(base_url(), 'refresh');
+           
+        if ($param1 == 'add_publisher') {
+            if ($this->input->post()):
+
+                $name = $this->input->post('name');
+                $phone = $this->input->post('phone');
+                $address = $this->input->post('address');
+                $email = $this->input->post('email');
+                $data = array('pub_name' => $name, 'pub_phone' => $phone, 'pub_address' => $address,'pub_email'=>$email, 'created_by' => $this->session->userdata('ifta_admin_login'), 'created_at' => date('Y-m-d H:i:s'));
+                $this->db->insert('lib_publisher', $data);
+            endif;
+            $this->session->set_flashdata('flash_message', 'ناشرکتب کو کامیابی سے داخل کر دیا گیا ہے۔');
+            redirect(base_url() . 'website/alasr_publisher', 'refresh');
+        }
+        if ($param1 == 'update_publisher') {
+           
+            $name = $this->input->post('name');
+            $phone = $this->input->post('phone');
+            $address = $this->input->post('address');
+            $email = $this->input->post('email');
+            $update_data = array('pub_name' => $name, 'pub_phone' => $phone, 'pub_address' => $address,'pub_email'=>$email, 'updated_by' => $this->session->userdata('ifta_admin_login'), 'updated_at' => date('Y-m-d H:i:s'));
+                       
+            $this->db->where('pub_id', $param2);
+            $this->db->update('lib_publisher', $update_data);
+
+
+            $this->session->set_flashdata('flash_message', 'ناشرکتب کی کامیابی سے تصیح کردیگی ہے۔');
+            redirect(base_url() . 'website/alasr_publisher', 'refresh');
+        }
+        if ($param1 == 'delete_publisher') {
+
+            $this->db->where('pub_id', $param2);
+            $this->db->delete('lib_publisher');
+            $this->session->set_flashdata('flash_message', 'ناشرکتب کو کامیابی سے حذف کر دیا گیاہے۔');
+            redirect(base_url() . 'website/alasr_publisher', 'refresh');
+        }
+
+
+        $page_data['page_name'] = 'alasr_publisher';
+        $page_data['page_title'] = get_phrase('alasr_resala');
+        $this->load->view('backend/website', $page_data);
+    }
+     function alasr_create_book()
+    {
+        //redirect(base_url() . 'website/alasr_create_book', 'refresh');
+        $page_data['page_name'] = 'alasr_create_book';
+        $page_data['page_title'] = get_phrase('alasr_resala');
+        $this->load->view('backend/website', $page_data);
+    }
+}   

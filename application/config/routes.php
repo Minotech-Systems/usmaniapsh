@@ -96,4 +96,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 //Library Routes
 
-$route['AddAurther'] = 'LibraryController/add_aurther';
+//$route['AddAurther'] = 'LibraryController/add_aurther';

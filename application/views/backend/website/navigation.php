@@ -74,6 +74,86 @@
                     <span><?php echo 'العصر رسالہ' ?></span>
                 </a>
             </li>
+               <li class="<?php if ($page_name == 'alasr_resala') echo 'active'; ?> ">
+                <a href="<?php echo base_url('website/alasr_book'); ?>">
+                    <i class="fa fa-book"></i>
+                    <span><?php echo 'کتاب'; ?></span>
+                </a>
+            </li>
+            <li class="<?php if ($page_name == 'alasr_resala') echo 'active'; ?> ">
+                <a href="<?php echo base_url('website/alasr_musanif'); ?>">
+                    <i class="entypo-pencil"></i>
+                    <span><?php echo 'مصنف';?></span>
+                </a>
+            </li>
+          <!--Topics-->
+          <li class="">
+                <a href="#">
+                    <i class="entypo-book-open"></i>
+                    <span><?php echo 'ٹاپک'; ?></span>
+                </a>
+                <ul>
+                    <li class="<?php if ($page_name == 'alasr_resala') echo 'active'; ?> ">
+                        <a href="<?php echo base_url(); ?>website/alasr_topic">
+                            <span><i class="entypo-pencil"></i> <?php echo 'اندراج ٹاپک'; ?></span>
+                        </a>
+                    </li>
+                    <li class="<?php if ($page_name == 'alasr_resala') echo 'active'; ?> ">
+                        <a href="<?php echo base_url(); ?>website/alasr_subtopic">
+                            <span><i class="entypo-pencil"></i> <?php echo'اندراج سب ٹاپک'; ?></span>
+                        </a>
+                    </li>
+                   
+                </ul>
+            </li>
+         
+        <!--Readers-->  
+            <li class="">
+                <a href="#">
+                    <i class="entypo-eye"></i>
+                    <span><?php echo 'قارئین '; ?></span>
+                </a>
+                <ul>
+                    <li class="<?php if ($page_name == 'alasr_resala') echo 'active'; ?> ">
+                        <a href="<?php echo base_url(); ?>website/alasr_reader">
+                            <span><i class="entypo-pencil"></i> <?php echo 'اندراج قاری'; ?></span>
+                        </a>
+                    </li>
+                    <li class="<?php if ($page_name == 'alasr_resala') echo 'active'; ?> ">
+                        <a href="<?php echo base_url(); ?>website/alasr_readertype">
+                            <span><i class="entypo-pencil"></i> <?php echo'اندراج قسم قاری '; ?></span>
+                        </a>
+                    </li>
+                   
+                </ul>
+                </li>
+             <!--Publishers-->  
+           <li class="<?php if ($page_name == 'alasr_resala') echo 'active'; ?> ">
+                <a href="<?php echo base_url('website/alasr_publisher'); ?>">
+                    <i class="entypo-pencil"></i>
+                    <span><?php echo 'ناشرکتب';?></span>
+                </a>
+            </li>
+            <!--Topics-->
+          <li class="">
+                <a href="#">
+                    <i class="entypo-newspaper"></i>
+                    <span><?php echo 'ترتیبات'; ?></span>
+                </a>
+                <ul>
+                    <li class="<?php if ($page_name == 'alasr_resala') echo 'active'; ?> ">
+                        <a href="<?php echo base_url(); ?>website/alasr_create_book">
+                            <span><i class="entypo-pencil"></i> <?php echo ' کتاب کو ترتیب دیں'; ?></span>
+                        </a>
+                    </li>
+                    <li class="<?php if ($page_name == 'alasr_resala') echo 'active'; ?> ">
+                        <a href="<?php echo base_url(); ?>">
+                            <span><i class="entypo-pencil"></i> <?php echo'اندراج'; ?></span>
+                        </a>
+                    </li>
+                   
+                </ul>
+            </li>
         </ul>
 
 
